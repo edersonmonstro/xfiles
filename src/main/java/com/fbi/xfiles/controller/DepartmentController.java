@@ -1,0 +1,55 @@
+package com.fbi.xfiles.controller;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fbi.xfiles.domain.Department;
+import com.fbi.xfiles.domain.dto.DepartmentDTO;
+import com.fbi.xfiles.services.DepartmentService;
+
+@Controller
+@RequestMapping("/departments")
+public class DepartmentController {
+	
+	@Autowired
+	DepartmentService service;
+	
+	Department department;
+	
+	@GetMapping
+	public ModelAndView index() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/department/list");
+		mv.addObject("message", "Welcome Agent X");
+		mv.addObject("list", service.findAll());
+		return mv;
+	}
+	
+	@GetMapping("/new")
+	public String frmCreate(Model model, @ModelAttribute("department") DepartmentDTO department) {
+		//model.addAttribute("activePage", "menuItemDepartments");
+		return "/department/form";
+	}
+
+	@PostMapping("/save")
+	public String saveObject(@ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult result) {
+		if (result.hasErrors()) {
+			return "/department/form";
+		}
+		Department s = new Department();
+		s = departmentDTO.toDepartment();
+		s.setCreationDate(new Date());
+		service.save(s);
+		return "redirect:/departments";
+	}
+		
+}

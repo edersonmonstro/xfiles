@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: head}"></head>
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h4>Departments <a href="/departments/new">Create New</a></h4>
+    <table>
+	  <tr>
+	    <th>#</th>
+	    <th>Name</th>
+	    <th>Creation Date</th>
+	    <th>E-Mail</th>
+	  </tr>
+	  <tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
+		<td th:text="${rs.id}"></td>
+	    <td th:text="${rs.name}"></td>
+	    <td th:text="${rs.creationDate}"></td>
+	    <td th:text="${rs.email}"></td>
+	  </tr>
+	</table>
+
+    
+    <div th:replace="~{base :: jscript}"></div>
+	<script>
+    	var URL = '[[@{/}]]api/';
+	</script>
+</body>
+</html>
