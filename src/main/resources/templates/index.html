@@ -7,18 +7,8 @@
 <body>
     <p th:text="'Index: Message from FBI: ' + ${message} + '!'" />
     
-    <table>
-	  <tr>
-	    <th>#</th>
-	    <th>Name</th>
-	    <th>Department</th>
-	  </tr>
-	  <tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
-		<td th:text="${rs.id}"></td>
-	    <td th:text="${rs.name}"></td>
-	    <td th:text="${rs.department}"></td>
-	  </tr>
-	</table>
+    <a href="http://localhost:8080/departments/">Departments</a>
+    <a href="http://localhost:8080/swagger-ui.html">Acessar Swagger</a>
 
     
     <div th:replace="~{base :: jscript}"></div>

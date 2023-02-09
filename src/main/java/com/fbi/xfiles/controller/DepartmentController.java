@@ -49,7 +49,7 @@ public class DepartmentController {
 		s = departmentDTO.toDepartment();
 		s.setCreationDate(new Date());
 		service.save(s);
-		return "redirect:/departments";
+		return "redirect:/departments/";
 	}
 		
 }
