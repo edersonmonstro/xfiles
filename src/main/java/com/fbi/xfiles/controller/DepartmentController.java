@@ -25,7 +25,7 @@ public class DepartmentController {
 	
 	Department department;
 	
-	@GetMapping
+	@GetMapping("/")
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/department/list");
