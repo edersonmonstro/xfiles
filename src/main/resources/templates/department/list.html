@@ -5,7 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h4>Departments <a href="/departments/new">Create New</a></h4>
+	<div th:replace="~{base :: menu-top}"></div>
+    <h4>
+    	Departments
+    	<a class="btn btn-primary" href="/departments/new" role="button"> <i class="fa-solid fa-circle-plus"></i> Create New</a>
+    </h4>
+    
     <table>
 	  <tr>
 	    <th>#</th>
@@ -20,6 +25,14 @@
 	    <td th:text="${rs.email}"></td>
 	  </tr>
 	</table>
+	
+	<div class="card col-12">
+	<div class="card-header">Create New</div>
+	  <div class="card-body">
+	    <h5 class="card-title">Create New</h5>
+	    table
+	  </div>
+	</div>
 
     
     <div th:replace="~{base :: jscript}"></div>
