@@ -1,28 +1,91 @@
 <head th:fragment="head">
- <meta charset="UTF-8"/>
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
- <meta name="description" content="XFILES" />
- <meta name="author" content="Felipe Andre / Ederson Medeiros" />
- <title>XFILES</title>  
- <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}" />
-  
- <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" /> 
- <link th:href="@{/css/animate.min.css}" rel="stylesheet" />
- <link th:href="@{/css/sweetalert2.min.css}" rel="stylesheet" />
- <link th:href="@{/css/select2.min.css}" rel="stylesheet" />
- <link th:href="@{/css/bootstrap-datepicker.min.css}" rel="stylesheet" />
- <link th:href="@{/css/all.min.css}" rel="stylesheet" />
- <link th:href="@{/css/bootstrap-duallistbox.min.css}" rel="stylesheet" />
- <link th:href="@{/css/datatables.min.css}" rel="stylesheet" />
- 
- <div th:fragment="jscript">
-    <script th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
-    <script th:src="@{/js/jquery-1.12.4.min.js}"></script>
-    <script th:src="@{/js/popper.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script> 
-    <script th:src="@{/js/select2.min.js}"></script>
-    <script th:src="@{/js/sweetalert.min.js}"></script>
-    <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
-    <script th:src="@{/js/locales/bootstrap-datepicker.pt-BR.js}"></script>
-    <script th:src="@{/js/utils.js}"></script>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="XFILES" />
+<meta name="author" content="Ederson Medeiros" />
+
+<title>XFILES</title>
+
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/css/animate.min.css}" rel="stylesheet" />
+<link th:href="@{/css/sweetalert2.min.css}" rel="stylesheet" />
+<link th:href="@{/css/select2.min.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-datepicker.min.css}" rel="stylesheet" />
+<link th:href="@{/css/fbi.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap-duallistbox.min.css}" rel="stylesheet" />
+<link th:href="@{/css/datatables.min.css}" rel="stylesheet" />
+
+<!-- variable activeMenu is set at every navigation from controller  -->
+<div th:fragment="menu-top">
+
+	<div class="container imgtop">
+		<img th:src="@{/images/emblem.png}" class="logo_emblem" />
+	</div>
+
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom mb-3">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/}">X-FILES</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+					<li class="nav-item"><a
+						th:classappend="${activePage} == 'mnuMonitZonas' ? 'active'"
+						class="nav-link" th:href="@{/departments/}">Departments</a></li>
+
+					<li class="nav-item"><a
+						th:classappend="${activePage} == 'mnuListMov' ? 'active'"
+						class="nav-link" th:href="@{/swagger-ui.html}">Swagger</a></li>
+
+
+					<li class="nav-item"><a class="nav-link" th:href="@{/login}">Login
+							&nbsp; <i class="fa fa-database fa" aria-hidden="true"
+							th:style="${isProduction} ? 'color:green' : 'color:red'"
+							th:title="${isProduction} ? 'Production DB' : 'Development DB'"></i>
+					</a></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<small th:text="USER"></small> - <small th:text="DEP"></small>
+					</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" th:href="@{/servidor}">My
+									data</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+								class="dropdown-item" th:href="@{/admins/}">Admins</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+
+						</ul></li>
+
+					<li class="nav-item"><a class="nav-link"> <i
+							class="fa fa-database fa" aria-hidden="true"></i>
+					</a></li>
+
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+
+</div>
+
+<div th:fragment="jscript">
+	<script th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+	<script th:src="@{/js/jquery-1.12.4.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/select2.min.js}"></script>
+	<script th:src="@{/js/sweetalert.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+	<script th:src="@{/js/locales/bootstrap-datepicker.pt-BR.js}"></script>
+	<script th:src="@{/js/utils.js}"></script>
 </div>
