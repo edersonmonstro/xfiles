@@ -43,14 +43,13 @@
     	var URL = '[[@{/}]]api/';
     	
     	$(document).ready(function () {
-    	    var table = $('#tb1').DataTable({
+    	    $('#tb1').DataTable({
     	    	"scrollY": "200px",
     	    	"scrollCollapse": true,
     	    	"paging": false,
     	    	"responsive": true
     	    });
-    	    
-    	    new $.fn.dataTable.FixedHeader( table );
+
     	});
 	</script>
 </body>
