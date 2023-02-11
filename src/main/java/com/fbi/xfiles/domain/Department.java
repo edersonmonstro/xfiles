@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "department")
@@ -18,7 +20,7 @@ public class Department implements Serializable {
 
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	@Column(nullable = false)
@@ -30,14 +32,25 @@ public class Department implements Serializable {
 	@Column
 	private String email;
 
+	@Column
+	private Boolean active;
+
 	public Department() {
 	}
 
-	public Department(Integer id, String name, Date creationDate, String email) {
+	public Department(Integer id, String name, Date creationDate, String email, Boolean active) {
 		this.id = id;
 		this.name = name;
 		this.creationDate = creationDate;
 		this.email = email;
+		this.active = active;
+	}
+
+	public Department(String name, Date creationDate, String email, Boolean active) {
+		this.name = name;
+		this.creationDate = creationDate;
+		this.email = email;
+		this.active = active;
 	}
 
 	public Integer getId() {
@@ -72,9 +85,17 @@ public class Department implements Serializable {
 		this.email = email;
 	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(creationDate, email, id, name);
+		return Objects.hash(creationDate, email, id, name, active);
 	}
 
 	@Override
@@ -87,12 +108,12 @@ public class Department implements Serializable {
 			return false;
 		Department other = (Department) obj;
 		return Objects.equals(creationDate, other.creationDate) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name);
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(active, other.active);
 	}
 
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", name=" + name + ", creationDate=" + creationDate + ", email=" + email + "]";
+		return "Department [id=" + id + ", name=" + name + ", creationDate=" + creationDate + ", email=" + email + ", active=" + active + "]";
 	}
 
 }

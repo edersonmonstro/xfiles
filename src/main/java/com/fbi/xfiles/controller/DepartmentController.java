@@ -25,7 +25,7 @@ public class DepartmentController {
 	
 	Department department;
 	
-	@GetMapping
+	@GetMapping("/")
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/department/list");
@@ -49,7 +49,7 @@ public class DepartmentController {
 		s = departmentDTO.toDepartment();
 		s.setCreationDate(new Date());
 		service.save(s);
-		return "redirect:/departments";
+		return "redirect:/departments/";
 	}
 		
 }
