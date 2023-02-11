@@ -28,9 +28,21 @@
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
 					<th scope="row" th:text="${rs.id}"></td>
-					<td th:text="${rs.name}"></td>
-					<td th:text="${rs.creationDate}"></td>
-					<td th:text="${rs.email}"></td>
+					<td>
+						<i class="icons-person-color fa fa-briefcase fa"></i>
+						<span th:text="${rs.name}"></span>
+					</td>
+					<td>
+						<i class="icons-person-color fa fa-calendar fa"></i>
+						<span th:id="'date' + ${rs.id}" th:text="${rs.creationDate}"></span>
+						
+						<span th:id="'badge' + ${rs.id}"></span>
+						
+					</td>
+					<td>
+						<i class="icons-person-color fa fa-envelope fa"></i>
+						<span th:text="${rs.email}"></span>
+					</td>
 			 	</tr>
 			 </tbody>
 		</table>
@@ -49,8 +61,25 @@
     	    	"paging": false,
     	    	"responsive": true
     	    });
+    	    
+    	    $('[id^="date"]').each(function(){
+    	    	var date_full = $(this).text().substring(0, 10);
+    	    	const date = parseDate(date_full);
+    	    	var today = new Date();
+    	    	today.setHours(0,0,0,0);
+    	    	var same = date.getTime() === today.getTime();
+    	    	if(same){
+    	    		$(this).append(" <span class='badge rounded-pill text-bg-primary'>Created Today</span>");
+    	    	}
+    	    });
 
     	});
+    	
+    	function parseDate(input) {
+    		  var parts = input.match(/(\d+)/g);
+    		  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+    		  return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+    		}
 	</script>
 </body>
 </html>
