@@ -25,23 +25,24 @@ public class DepartmentController {
 	
 	Department department;
 	
-	@GetMapping("/")
-	public ModelAndView index() {
+	@GetMapping("")
+	public ModelAndView index(Model model) {
+		model.addAttribute("activePage", "menuItemDepartments");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/department/list");
-		mv.addObject("message", "Welcome Agent X");
 		mv.addObject("list", service.findAll());
 		return mv;
 	}
 	
 	@GetMapping("/new")
 	public String frmCreate(Model model, @ModelAttribute("department") DepartmentDTO department) {
-		//model.addAttribute("activePage", "menuItemDepartments");
+		model.addAttribute("activePage", "menuItemDepartments");
 		return "/department/form";
 	}
 
 	@PostMapping("/save")
-	public String saveObject(@ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult result) {
+	public String saveObject(Model model, @ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult result) {
+		model.addAttribute("activePage", "menuItemDepartments");
 		if (result.hasErrors()) {
 			return "/department/form";
 		}
