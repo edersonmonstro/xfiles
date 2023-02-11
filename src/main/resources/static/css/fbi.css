@@ -1,0 +1,19 @@
+
+body {
+	background-color: #333333;
+}
+
+.logo_emblem {
+	width: auto;
+	height: 100px;
+}
+
+.logo_emblem_bg {
+	width: auto;
+	height: 600px;
+	opacity: 0.1;
+}
+
+.float_right {
+	float: right;
+}

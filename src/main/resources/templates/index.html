@@ -5,12 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Index: Message from FBI: ' + ${message} + '!'" />
-    
-    <a href="http://localhost:8080/departments/">Departments</a>
-    <a href="http://localhost:8080/swagger-ui.html">Acessar Swagger</a>
+	<div th:replace="~{base :: menu-top}"></div>
 
-    
+    <img th:src="@{/images/emblem_bg.png}" class="logo_emblem_bg rounded mx-auto d-block"/>
+
     <div th:replace="~{base :: jscript}"></div>
 	<script>
     	var URL = '[[@{/}]]api/';
