@@ -6,38 +6,52 @@
 </head>
 <body>
 	<div th:replace="~{base :: menu-top}"></div>
-    <h4>
-    	Departments
-    	<a class="btn btn-primary" href="/departments/new" role="button"> <i class="fa-solid fa-circle-plus"></i> Create New</a>
-    </h4>
-    
-    <table>
-	  <tr>
-	    <th>#</th>
-	    <th>Name</th>
-	    <th>Creation Date</th>
-	    <th>E-Mail</th>
-	  </tr>
-	  <tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
-		<td th:text="${rs.id}"></td>
-	    <td th:text="${rs.name}"></td>
-	    <td th:text="${rs.creationDate}"></td>
-	    <td th:text="${rs.email}"></td>
-	  </tr>
-	</table>
 	
 	<div class="card col-12">
-	<div class="card-header">Create New</div>
-	  <div class="card-body">
-	    <h5 class="card-title">Create New</h5>
-	    table
-	  </div>
+		<div class="card-header"> <i class="fa-solid fa-briefcase"></i> Departments 
+			<a class="btn btn-secondary btn-sm float_right" href="/departments/new" role="button"> 
+				<i class="fa-solid fa-circle-plus"></i>
+				Create New
+			</a>
+		</div>
+		
+		<div class="card-body">
+		   <h5 class="card-title">List of Departments </h5>
+		   
+		<table id="tb1" class="table table-striped table-hover">
+			<thead>
+				<th>#</th>
+				<th>Name</th>
+				<th>Creation Date</th>
+				<th>E-Mail</th>
+			</thead>
+			<tbody>
+				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
+					<th scope="row" th:text="${rs.id}"></td>
+					<td th:text="${rs.name}"></td>
+					<td th:text="${rs.creationDate}"></td>
+					<td th:text="${rs.email}"></td>
+			 	</tr>
+			 </tbody>
+		</table>
+		
+		 </div>
 	</div>
-
     
     <div th:replace="~{base :: jscript}"></div>
 	<script>
     	var URL = '[[@{/}]]api/';
+    	
+    	$(document).ready(function () {
+    	    var table = $('#tb1').DataTable({
+    	    	"scrollY": "200px",
+    	    	"scrollCollapse": true,
+    	    	"paging": false,
+    	    	"responsive": true
+    	    });
+    	    
+    	    new $.fn.dataTable.FixedHeader( table );
+    	});
 	</script>
 </body>
 </html>

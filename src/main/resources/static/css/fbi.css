@@ -13,3 +13,7 @@ body {
 	height: 600px;
 	opacity: 0.1;
 }
+
+.float_right {
+	float: right;
+}
