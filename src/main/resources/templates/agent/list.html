@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base :: head}"></head>
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:replace="~{base :: menu-top}"></div>
+	
+	<div class="card col-12">
+		<div class="card-header"> <i class="fa-solid fa-briefcase"></i> Agents 
+			<a class="btn btn-secondary btn-sm float_right" href="/agents/new" role="button"> 
+				<i class="fa-solid fa-circle-plus"></i>
+				Create New
+			</a>
+		</div>
+		
+		<div class="card-body">
+		   <h5 class="card-title">List of Agents </h5>
+		   
+		<table id="tb1" class="table table-striped table-hover">
+			<thead>
+				<th>#</th>
+				<th>Name</th>
+				<th>Birth Date</th>
+			</thead>
+			<tbody>
+				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
+					<th scope="row" th:text="${rs.id}"></td>
+					<td>
+						<i class="icons-person-color fa fa-briefcase fa"></i>
+						<span th:text="${rs.name}"></span>
+					</td>
+					<td>
+						<i class="icons-person-color fa fa-calendar fa"></i>
+						<span th:id="'date' + ${rs.id}" th:text="${rs.birthDate}"></span>
+						
+						<span th:id="'badge' + ${rs.id}"></span>
+						
+					</td>
+			 	</tr>
+			 </tbody>
+		</table>
+		
+		 </div>
+	</div>
+    
+    <div th:replace="~{base :: jscript}"></div>
+	<script>
+    	var URL = '[[@{/}]]api/';
+    	
+    	$(document).ready(function () {
+    	    $('#tb1').DataTable({
+    	    	"scrollY": "200px",
+    	    	"scrollCollapse": true,
+    	    	"paging": false,
+    	    	"responsive": true
+    	    });
+    	
+
+    	});
+    	
+	</script>
+</body>
+</html>

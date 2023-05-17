@@ -6,8 +6,12 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -20,18 +24,20 @@ public class Agent implements Serializable {
 
 	@Id
 	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	@Column(nullable = false)
 	private String name;
 
 	@Column
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthDate;
 	
 	@Column
-	private String department;
+	private Department department;
 
-	public Agent(Integer id, String name, Date birthDate, String department) {
+	public Agent(Integer id, String name, Date birthDate, Department department) {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
@@ -61,11 +67,11 @@ public class Agent implements Serializable {
 		return birthDate;
 	}
 
-	public String getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 
