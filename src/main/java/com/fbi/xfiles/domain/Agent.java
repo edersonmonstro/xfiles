@@ -1,19 +1,15 @@
 package com.fbi.xfiles.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-
 
 
 @Entity
@@ -31,13 +27,13 @@ public class Agent implements Serializable {
 	private String name;
 
 	@Column
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date birthDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate birthDate;
 	
 	@Column
 	private Department department;
 
-	public Agent(Integer id, String name, Date birthDate, Department department) {
+	public Agent(Integer id, String name, LocalDate birthDate, Department department) {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
@@ -63,7 +59,7 @@ public class Agent implements Serializable {
 		this.name = name;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
@@ -75,7 +71,7 @@ public class Agent implements Serializable {
 		this.department = department;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 

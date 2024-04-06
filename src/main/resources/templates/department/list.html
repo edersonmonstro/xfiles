@@ -34,7 +34,8 @@
 					</td>
 					<td>
 						<i class="icons-person-color fa fa-calendar fa"></i>
-						<span th:id="'date' + ${rs.id}" th:text="${rs.creationDate}"></span>
+
+						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />
 						
 						<span th:id="'badge' + ${rs.id}"></span>
 						

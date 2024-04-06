@@ -1,6 +1,8 @@
 package com.fbi.xfiles.domain.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fbi.xfiles.domain.Agent;
 import com.fbi.xfiles.domain.Department;
@@ -11,14 +13,15 @@ public class AgentDTO {
 
 	private String name;
 
-	private Date birthDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate birthDate;
 
 	private Department department;
 
 	public AgentDTO() {
 	}
 
-	public AgentDTO(Integer id, String name, Date birthDate, Department department) {
+	public AgentDTO(Integer id, String name, LocalDate birthDate, Department department) {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
@@ -41,11 +44,11 @@ public class AgentDTO {
 		this.name = name;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
