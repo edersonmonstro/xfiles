@@ -8,22 +8,21 @@
 	<div th:replace="~{base :: menu-top}"></div>
 	
 	<div class="card col-12">
-		<div class="card-header"> <i class="fa-solid fa-briefcase"></i> Departments 
-			<a class="btn btn-secondary btn-sm float_right" href="/departments/new" role="button"> 
+		<div class="card-header"> <i class="fa-solid fa-briefcase"></i> Agents 
+			<a class="btn btn-secondary btn-sm float_right" href="/agents/new" role="button"> 
 				<i class="fa-solid fa-circle-plus"></i>
 				Create New
 			</a>
 		</div>
 		
 		<div class="card-body">
-		   <h5 class="card-title">List of Departments </h5>
+		   <h5 class="card-title">List of Agents </h5>
 		   
 		<table id="tb1" class="table table-striped table-hover">
 			<thead>
 				<th>#</th>
 				<th>Name</th>
-				<th>Creation Date</th>
-				<th>E-Mail</th>
+				<th>Birth Date</th>
 			</thead>
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
@@ -34,15 +33,11 @@
 					</td>
 					<td>
 						<i class="icons-person-color fa fa-calendar fa"></i>
+						<!--<span th:id="'date' + ${rs.id}" th:text="${rs.birthDate}"></span>-->
+						<span th:id="'date' + ${rs.id}" th:text="${#temporals.format(rs.birthDate, 'dd/MM/yyyy')}" />
 
-						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />
-						
 						<span th:id="'badge' + ${rs.id}"></span>
 						
-					</td>
-					<td>
-						<i class="icons-person-color fa fa-envelope fa"></i>
-						<span th:text="${rs.email}"></span>
 					</td>
 			 	</tr>
 			 </tbody>
@@ -62,25 +57,10 @@
     	    	"paging": false,
     	    	"responsive": true
     	    });
-    	    
-    	    $('[id^="date"]').each(function(){
-    	    	var date_full = $(this).text().substring(0, 10);
-    	    	const date = parseDate(date_full);
-    	    	var today = new Date();
-    	    	today.setHours(0,0,0,0);
-    	    	var same = date.getTime() === today.getTime();
-    	    	if(same){
-    	    		$(this).append(" <span class='badge rounded-pill text-bg-primary'>Created Today</span>");
-    	    	}
-    	    });
+    	
 
     	});
     	
-    	function parseDate(input) {
-    		  var parts = input.match(/(\d+)/g);
-    		  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-    		  return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
-    		}
 	</script>
 </body>
 </html>
