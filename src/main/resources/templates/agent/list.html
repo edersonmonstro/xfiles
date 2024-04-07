@@ -28,12 +28,12 @@
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
 					<th scope="row" th:text="${rs.id}"></td>
 					<td>
-						<i class="icons-person-color fa fa-briefcase fa"></i>
+						<i class="icon_color fa fa-briefcase"></i>
 						<span th:text="${rs.name}"></span>
 					</td>
 					<td>
-						<i class="icons-person-color fa fa-calendar fa"></i>
-						<!--<span th:id="'date' + ${rs.id}" th:text="${rs.birthDate}"></span>-->
+						<i class="icon_color fa fa-calendar"></i>
+						
 						<span th:id="'date' + ${rs.id}" th:text="${#temporals.format(rs.birthDate, 'dd/MM/yyyy')}" />
 
 						<span th:id="'badge' + ${rs.id}"></span>
