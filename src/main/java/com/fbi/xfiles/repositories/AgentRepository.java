@@ -13,4 +13,9 @@ public interface AgentRepository extends JpaRepository<Agent, Integer> {
 	@Query("SELECT a FROM Agent a WHERE a.department = :department ORDER BY a.id DESC")
 	List<Agent> findAgentsByDepartment(@Param("department") String department);
 
+	/**
+     * @param id
+     * @return
+     */
+    Agent getOne(Integer id);
 }

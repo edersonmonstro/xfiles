@@ -23,6 +23,7 @@
 				<th>#</th>
 				<th>Name</th>
 				<th>Birth Date</th>
+				<th>Actions</th>
 			</thead>
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
@@ -38,6 +39,11 @@
 
 						<span th:id="'badge' + ${rs.id}"></span>
 						
+					</td>
+					<td>
+						<a th:href="@{'/agents/setupEdit/'+${rs.id}}" class="btn btn-sm btn-secondary" role="button" title="Edit">
+							<i class="icon_color fa fa-pencil"></i>	
+						</a>
 					</td>
 			 	</tr>
 			 </tbody>

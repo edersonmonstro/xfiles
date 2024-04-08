@@ -14,7 +14,7 @@
 			<div th:if="${department.id} == null" class="card-header">Department - Insert</div>
 			<div class="card-body">
 				<form class="row g-3" th:object="${department}" th:action="@{/departments/save}" method="post" id="frm">
-					<!-- Campo oculto para o ID do departamento -->
+					
 					<input type="hidden" th:field="*{id}">
 
 					<div class="input-group col-9">

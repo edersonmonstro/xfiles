@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,6 +40,13 @@ public class AgentController {
 		return "/agent/form";
 	}
 
+	/**
+	 * Save Method. Works both for new and edit
+	 * @param model
+	 * @param departmentDTO
+	 * @param result
+	 * @return an agent saved and user redirected to list screen
+	 */
 	@PostMapping("/save")
 	public String saveObject(Model model, @ModelAttribute("agent") AgentDTO agentDTO,
 			BindingResult result) {
@@ -53,6 +61,13 @@ public class AgentController {
 		a = agentDTO.toAgent();
 		service.save(a);
 		return "redirect:/agents/";
+	}
+
+	@GetMapping("/setupEdit/{id}")
+	public String setupEdit(@PathVariable("id") Integer id, Model model) {
+		Agent agent = service.getOne(id);
+		model.addAttribute("agent", agent);
+		return "/agent/form";
 	}
 
 }

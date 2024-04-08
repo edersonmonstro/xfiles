@@ -40,6 +40,13 @@ public class DepartmentController {
 		return "/department/form";
 	}
 
+	/**
+	 * Save Method. Works both for new and edit
+	 * @param model
+	 * @param departmentDTO
+	 * @param result
+	 * @return a department saved and user redirected to list screen
+	 */
 	@PostMapping("/save")
 	public String saveObject(Model model, @ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult result) {
 		model.addAttribute("activePage", "menuItemDepartments");
