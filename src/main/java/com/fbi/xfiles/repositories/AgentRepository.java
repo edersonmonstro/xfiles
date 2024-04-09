@@ -10,12 +10,23 @@ import com.fbi.xfiles.domain.Agent;
 
 public interface AgentRepository extends JpaRepository<Agent, Integer> {
 	
-	@Query("SELECT a FROM Agent a WHERE a.department = :department ORDER BY a.id DESC")
-	List<Agent> findAgentsByDepartment(@Param("department") String department);
+   /**
+     * @param name
+     * @return
+     */
+    @Query("SELECT a FROM Agent a WHERE a.name LIKE '%:name%'")
+	List<Agent> findAllByName(@Param("name") String name);
 
 	/**
      * @param id
      * @return
      */
     Agent getOne(Integer id);
+
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    List<Agent> findByName(String name);
 }

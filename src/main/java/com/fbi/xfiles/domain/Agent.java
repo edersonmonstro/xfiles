@@ -40,6 +40,12 @@ public class Agent implements Serializable {
 		this.department = department;
 	}
 
+	public Agent(String name, LocalDate birthDate, Department department) {
+		this.name = name;
+		this.birthDate = birthDate;
+		this.department = department;
+	}
+
 	public Agent() {
 	}
 

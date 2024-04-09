@@ -2,8 +2,6 @@ package com.fbi.xfiles.controller.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fbi.xfiles.domain.Department;
-import com.fbi.xfiles.services.DepartmentService;
+import com.fbi.xfiles.domain.Agent;
+import com.fbi.xfiles.services.AgentService;
 
 @RestController
-@RequestMapping("/api/departments")
-public class DepartmentRestController {
+@RequestMapping("/api/agents")
+public class AgentRestController {
     
     @Autowired
-    DepartmentService service;
+    AgentService service;
 
     /**
-     * List all departments
+     * List all agents
      * @return
      */
     @GetMapping("/")
-    public ResponseEntity<List<Department>> getAllDepartments(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<Agent>> getAll(@RequestParam(required = false) String name) {
       try {
-        List<Department> departments = new ArrayList<Department>();
+        List<Agent> list = new ArrayList<Agent>();
         if (name == null)
-            departments = service.findAll();
+            list = service.findAll();
         else
-            departments = service.findByName(name);
+            list = service.findByName(name);
   
-        if (departments.isEmpty()) {
+        if (list.isEmpty()) {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
   
-        return new ResponseEntity<>(departments, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
       } catch (Exception e) {
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
       }
@@ -54,8 +52,8 @@ public class DepartmentRestController {
      * 
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Department> getDepartmentById(@PathVariable("id") Integer id) {
-      Department data = service.getOne(id);
+    public ResponseEntity<Agent> getById(@PathVariable("id") Integer id) {
+      Agent data = service.getOne(id);
   
       if (data.getId() != null) {
         return new ResponseEntity<>(data, HttpStatus.OK);
@@ -68,10 +66,10 @@ public class DepartmentRestController {
      * 
      */
     @PostMapping("/")
-    public ResponseEntity<Department> createDepartment(@RequestBody Department department) {
+    public ResponseEntity<Agent> create(@RequestBody Agent agent) {
         try {
-            Department _department = service.save(new Department(department.getName(), department.getCreationDate(), department.getEmail(), department.getActive()));
-        return new ResponseEntity<>(_department, HttpStatus.CREATED);
+            Agent _object = service.save(new Agent(agent.getName(), agent.getBirthDate(), agent.getDepartment()));
+        return new ResponseEntity<>(_object, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -84,10 +82,10 @@ public class DepartmentRestController {
      * @return
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Department> update(@RequestBody Department department) {   
-      Department data = service.getOne(department.getId());
+    public ResponseEntity<Agent> update(@RequestBody Agent agent) {   
+      Agent data = service.getOne(agent.getId());
       if (data.getId() != null) {
-        return new ResponseEntity<>(service.save(department), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(agent), HttpStatus.OK);
       } else {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
       }
@@ -97,7 +95,7 @@ public class DepartmentRestController {
      * 
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteDepartment(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Integer id) {
         try {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -107,7 +105,7 @@ public class DepartmentRestController {
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<HttpStatus> deleteAllDepartments() {
+    public ResponseEntity<HttpStatus> deleteAll() {
       try {
         service.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -117,17 +115,4 @@ public class DepartmentRestController {
   
     }
 
-    @GetMapping("/active")
-    public ResponseEntity<List<Department>> findByActive() {
-      try {
-        List<Department> departments = service.findByActive(true);
-  
-        if (departments.isEmpty()) {
-          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(departments, HttpStatus.OK);
-      } catch (Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-    }
 }

@@ -1,6 +1,8 @@
 package com.fbi.xfiles.services;
 
 import java.util.List;
+
+import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +18,25 @@ public class AgentService {
 	public List<Agent> findAll(){
 		return repository.findAll();
 	}
-	
-	public Agent save(Agent d) {
-		return repository.save(d);
-	}
-	
-	public List<Agent> findAgentsByDepartment(String department) {
-		return repository.findAgentsByDepartment(department);
+
+	public List<Agent> findByName(String name){
+		return repository.findAllByName(name);
 	}
 
 	public Agent getOne(Integer id){
 		return repository.getOne(id);
+	}
+
+	public Agent save(Agent d) {
+		return repository.save(d);
+	}
+
+	public void deleteById(Integer id){
+		repository.deleteById(id);
+	}
+
+	public void deleteAll(){
+		repository.deleteAll();
 	}
 	
 }

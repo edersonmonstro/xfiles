@@ -44,6 +44,12 @@
 						<a th:href="@{'/agents/setupEdit/'+${rs.id}}" class="btn btn-sm btn-secondary" role="button" title="Edit">
 							<i class="icon_color fa fa-pencil"></i>	
 						</a>
+
+						<a href="#" th:id="'remove'+${rs.id}" class="btn btn-sm btn-danger delete-btn"
+						th:data-record-id="${rs.id}" 
+						th:data-record-description="${rs.name}">
+						<i class="fa fa-trash"></i>
+						</a>
 					</td>
 			 	</tr>
 			 </tbody>
@@ -51,8 +57,11 @@
 		
 		 </div>
 	</div>
+
+  
     
     <div th:replace="~{base :: jscript}"></div>
+	
 	<script>
     	var URL = '[[@{/}]]api/';
     	
@@ -63,9 +72,40 @@
     	    	"paging": false,
     	    	"responsive": true
     	    });
-    	
-
     	});
+
+    $("[id*='remove']").click(function(event) {
+        var data = $(event.delegateTarget).data();
+		var id = data.recordId;
+		var description = data.recordDescription;
+        
+        Swal.fire({
+            title: 'Confirmation',
+			html: 'Are you sure you want to remove <b>' + description + '</b>?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Remove',
+			confirmButtonColor: '#FF3333',
+            cancelButtonText: 'Cancel',
+			cancelButtonColor: '#999900'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/api/agents/' + id,
+                    type: 'DELETE',
+                    success: function(jsonResponse) {
+						var tipomsg = 'success';
+                        $('#tr'+id).fadeOut(1500);
+                    },
+                    error: function(xhr, status, error) {
+                        //
+                    }
+                });
+            }
+        });
+    });
+
+
     	
 	</script>
 </body>
