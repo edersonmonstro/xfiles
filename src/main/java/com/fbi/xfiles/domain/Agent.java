@@ -2,16 +2,27 @@ package com.fbi.xfiles.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+@Audited
 @Entity
 @Table(name = "agent")
 public class Agent implements Serializable {
@@ -29,9 +40,34 @@ public class Agent implements Serializable {
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
-	
+
 	@Column
 	private Department department;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Audited(withModifiedFlag = true)
+    private Date dataCriacao;
+
+    @Temporal(TemporalType.TIMESTAMP)
+	@Audited(withModifiedFlag = false)
+    private Date dataModificacao;
+
+	@Column
+	@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    private String usuarioModificador;
+
+    // Getters e setters
+
+    @PrePersist
+    protected void onCreate() {
+        dataCriacao = new Date();
+        dataModificacao = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        dataModificacao = new Date();
+    }
 
 	public Agent(Integer id, String name, LocalDate birthDate, Department department) {
 		this.id = id;

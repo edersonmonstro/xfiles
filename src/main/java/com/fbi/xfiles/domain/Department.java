@@ -11,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 
+@Audited
 @Entity
 @Table(name = "department")
 public class Department implements Serializable {
