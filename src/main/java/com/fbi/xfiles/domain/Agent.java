@@ -2,6 +2,7 @@ package com.fbi.xfiles.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Agent implements Serializable {
     @JoinColumn(name = "department_id")
     private Department department;
 
-	public Agent(Integer id, String name, Date birthDate, Department department) {
+	public Agent(Integer id, String name, LocalDate birthDate, Department department) {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
