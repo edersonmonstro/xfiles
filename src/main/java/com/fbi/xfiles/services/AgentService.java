@@ -16,16 +16,12 @@ public class AgentService {
 	AgentRepository repository;
 	
 	public List<Agent> findAll(){
-		return repository.findAll();
+		return repository.findAllWithDepartment();
 	}
 	
 	public Agent save(Agent d) {
 		return repository.save(d);
 	}
-	
-	public List<Agent> getAllAgents() {
-        return repository.findAll();
-    }
 
 	public List<Agent> findAgentsByDepartment(Department department) {
 		return repository.findAgentsByDepartment(department);

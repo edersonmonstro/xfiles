@@ -15,4 +15,7 @@ public interface AgentRepository extends JpaRepository<Agent, Integer> {
 	List<Agent> findAgentsByDepartment(@Param("department") Department department);
 
 	List<Agent> findByDepartment(Department department);
+
+	@Query("SELECT a FROM Agent a JOIN FETCH a.department")
+	List<Agent> findAllWithDepartment();
 }
