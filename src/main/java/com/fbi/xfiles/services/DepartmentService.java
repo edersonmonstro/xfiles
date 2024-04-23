@@ -16,7 +16,7 @@ public class DepartmentService {
 	DepartmentRepository repository;
 
 	public List<Department> findAll(){
-		return repository.findAll();
+		return repository.findAllWithAgents();
 	}
 
 	public List<Department> findByName(String name){

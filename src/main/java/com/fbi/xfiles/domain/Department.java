@@ -99,6 +99,14 @@ public class Department implements Serializable {
 		this.active = active;
 	}
 
+	public List<Agent> getAgents(){
+		return agents;
+	}
+
+	public void setAgents(List<Agent> agents){
+		this.agents = agents;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(creationDate, email, id, name, active);
