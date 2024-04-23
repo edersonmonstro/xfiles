@@ -1,7 +1,6 @@
 package com.fbi.xfiles.repositories;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,16 +14,23 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
      * @return
      */
     @Query("SELECT d FROM Department d WHERE d.name LIKE '%:name%'")
-	List<Department> findAllByName(@Param("name") String name);
+	  List<Department> findAllByName(@Param("name") String name);
 
     /**
-     * @param name
+     * @param active
      * @return
      */
     @Query("SELECT d FROM Department d WHERE d.active = :active")
-	List<Department> findAllByActive(@Param("active") Boolean active);
+	  List<Department> findAllByActive(@Param("active") Boolean active);
+
+     /**
+     * @param id
+     * @return
+     */
+    Department getOne(Integer id);
 
     @Query("SELECT DISTINCT d FROM Department d LEFT JOIN FETCH d.agents")
-	List<Department> findAllWithAgents();
+	  List<Department> findAllWithAgents();
+
 
 }

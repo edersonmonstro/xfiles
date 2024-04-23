@@ -9,27 +9,35 @@
 	<div class="container px-3 px-lg-5">
 
 		<div class="card">
-			<div class="card-header">Insert</div>
+
+			<div th:if="${agent.id} != null" class="card-header">agent - Edit</div>
+			<div th:if="${agent.id} == null" class="card-header">agent - Insert</div>
 			<div class="card-body">
-				<form class="row g-3" th:object="${agent}"
-					th:action="@{/agents/save}" method="post" id="frm">
+				<form class="row g-3" th:object="${agent}" th:action="@{/agents/save}" method="post" id="frm">
+					
 					<input type="hidden" th:field="*{id}">
 
-					<div class="col-9">
-						<label for="inputName" class="form-label">Name</label> 
-						<input
-							type="text" th:errorclass="is-invalid" class="form-control"
-							th:field="*{name}" placeholder="insert the name of the agent">
-						<div class="invalid-feedback" th:errors="*{name}">Insert a valid name for department</div>
-					</div>
-					
-					<div class="col-9">
-						<label for="inputBirthDate" class="form-label">Birth Date</label> 
-						<input
-							type="date" th:errorclass="is-invalid" class="form-control"
-							th:field="*{birthDate}" placeholder="insert the date of birth of the agent">
-						<div class="invalid-feedback" th:errors="*{birthDate}">Insert a valid birth date for agent</div>
-					</div>
+					<div class="input-group col-9">
+                        <span class="input-group-text" id="name">
+							<i class="icon_color fa-solid fa-person"></i> &nbsp;
+							Name
+						</span>
+                        <input
+                            type="text" th:errorclass="is-invalid" class="form-control"
+                            th:field="*{name}" placeholder="insert the name of the agent">
+                        <div class="invalid-feedback" th:errors="*{name}">Insert a valid name for department</div>
+                    </div>
+                    
+                    <div class="input-group col-9">
+                        <span class="input-group-text" id="name">
+							<i class="icon_color fa-solid fa-calendar"></i> &nbsp;
+							Birth Date
+						</span>
+                        <input
+                            type="date" th:errorclass="is-invalid" class="form-control"
+                            th:field="*{birthDate}" placeholder="insert the date of birth of the agent">
+                        <div class="invalid-feedback" th:errors="*{birthDate}">Insert a valid birth date for agent</div>
+                    </div>
 
 					<div class="col-9">
 						<label for="inputDepartment" class="form-label">Department</label> 
@@ -40,22 +48,40 @@
 					</div>
 
 					<div class="col-12">
-						<button type="submit" id="save" class="btn btn-primary btn-sm">Insert</button>
-						<button type="button" class="btn btn-warning btn-sm" id="back"
-							onclick="history.back()">Back</button>
+						<button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
+						<button type="button" class="btn btn-warning btn-sm" id="back" onclick="history.back()">Back</button>
 					</div>
 				</form>
 			</div>
 		</div>
+		
 
 	</div>
 	<!-- End Page Content-->
 
-	<div th:replace="~{base :: jscript}"></div>
+	
 
-	<script type="text/javascript"> 
+	<script type="text/javascript">
+
+/*  $( "#salvar" ).click(function(event) {
+		event.preventDefault();
+		var data = $(event.delegateTarget).data();
+		var id = data.recordId;
+		swal({
+			  title: 'Salvar?',
+			  text: "Deseja salvar novo servidor?",
+			  icon: 'warning',
+			  buttons: [true, "Sim Salvar!"]
+			}).then((result) => {
+			  if (result) {
+			 	var frm = $("#frm").submit();
+			 	
+			   }
+			})
+	       
+	 }); */
  
-	</script>
+</script>
 
 </body>
 </html>

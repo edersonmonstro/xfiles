@@ -1,8 +1,6 @@
 package com.fbi.xfiles.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,16 +21,12 @@ public class DepartmentService {
 		return repository.findAllByName(name);
 	}
 
-	public Optional<Department> findById(Integer id){
-		return repository.findById(id);
+	public Department getOne(Integer id){
+		return repository.getOne(id);
 	}
 
 	public Department save(Department d) {
 		return repository.save(d);
-	}
-
-	public Department update(Department d) {
-		return repository.saveAndFlush(d);
 	}
 
 	public void deleteById(Integer id){

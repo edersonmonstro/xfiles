@@ -1,13 +1,13 @@
 package com.fbi.xfiles.controller;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +41,13 @@ public class DepartmentController {
 		return "/department/form";
 	}
 
+	/**
+	 * Save Method. Works both for new and edit
+	 * @param model
+	 * @param departmentDTO
+	 * @param result
+	 * @return a department saved and user redirected to list screen
+	 */
 	@PostMapping("/save")
 	public String saveObject(Model model, @ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult result) {
 		model.addAttribute("activePage", "menuItemDepartments");
@@ -53,5 +60,12 @@ public class DepartmentController {
 		service.save(s);
 		return "redirect:/departments/";
 	}
-		
+
+	@GetMapping("/setupEdit/{id}")
+	public String setupEdit(@PathVariable("id") Integer id, Model model) {
+		Department department = service.getOne(id);
+		model.addAttribute("department", department);
+		return "/department/form";
+	}
+	
 }

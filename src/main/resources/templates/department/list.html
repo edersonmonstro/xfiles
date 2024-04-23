@@ -25,31 +25,46 @@
 				<th>Creation Date</th>
 				<th>E-Mail</th>
 				<th>Agents Designated</th>
+   			<th>Actions</th>
 			</thead>
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
 					<th scope="row" th:text="${rs.id}"></td>
 					<td>
-						<i class="icons-person-color fa fa-briefcase"></i>
+
+						<i class="icon_color fa fa-briefcase"></i>
 						<span th:text="${rs.name}"></span>
 					</td>
+        
 					<td>
-						<i class="icons-person-color fa fa-calendar"></i>
-
-						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />
-						
+						<i class="icon_color fa fa-calendar"></i>
+						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />						
 						<span th:id="'badge' + ${rs.id}"></span>
-						
 					</td>
+        
 					<td>
-						<i class="icons-person-color fa fa-envelope"></i>
+						<i class="icon_color fa fa-envelope"></i>
 						<span th:text="${rs.email}"></span>
 					</td>
-					<td>
+        
+          <td>
 						<ul class="list-group">
 							<li class="list-group-item" th:each="agent : ${rs.agents}" th:text="${agent.name}"></li>
 						</ul>
 					</td>
+        
+					<td>
+						<a th:href="@{'/departments/setupEdit/'+${rs.id}}" class="btn btn-sm btn-secondary" role="button" title="Edit">
+							<i class="icon_color fa fa-pencil"></i>	
+						</a>
+
+						<a href="#" th:id="'remove'+${rs.id}" class="btn btn-sm btn-danger delete-btn"
+						th:data-record-id="${rs.id}" 
+						th:data-record-description="${rs.name}">
+						<i class="fa fa-trash"></i>
+						</a>
+        </td>
+        
 			 	</tr>
 			 </tbody>
 		</table>
@@ -81,6 +96,37 @@
     	    });
 
     	});
+
+		$("[id*='remove']").click(function(event) {
+			var data = $(event.delegateTarget).data();
+			var id = data.recordId;
+			var description = data.recordDescription;
+			
+			Swal.fire({
+				title: 'Confirmation',
+				html: 'Are you sure you want to remove <b>' + description + '</b>?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Remove',
+				confirmButtonColor: '#FF3333',
+				cancelButtonText: 'Cancel',
+				cancelButtonColor: '#999900'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: '/api/departments/' + id,
+						type: 'DELETE',
+						success: function(jsonResponse) {
+							var tipomsg = 'success';
+							$('#tr'+id).fadeOut(1500);
+						},
+						error: function(xhr, status, error) {
+							//
+						}
+					});
+				}
+			});
+		});
     	
     	function parseDate(input) {
     		  var parts = input.match(/(\d+)/g);
