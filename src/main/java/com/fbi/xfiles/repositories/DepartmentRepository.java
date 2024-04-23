@@ -24,4 +24,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     @Query("SELECT d FROM Department d WHERE d.active = :active")
 	List<Department> findAllByActive(@Param("active") Boolean active);
 
+    @Query("SELECT DISTINCT d FROM Department d JOIN FETCH d.agents")
+	List<Department> findAllWithAgents();
+
 }

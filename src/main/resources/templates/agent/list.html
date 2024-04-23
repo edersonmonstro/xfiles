@@ -23,12 +23,13 @@
 				<th>#</th>
 				<th>Name</th>
 				<th>Birth Date</th>
+				<th>Department</th>
 			</thead>
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
 					<th scope="row" th:text="${rs.id}"></td>
 					<td>
-						<i class="icons-person-color fa fa-briefcase fa"></i>
+						<i class="icons-person-color fa fa-person fa"></i>
 						<span th:text="${rs.name}"></span>
 					</td>
 					<td>
@@ -38,6 +39,10 @@
 
 						<span th:id="'badge' + ${rs.id}"></span>
 						
+					</td>
+					<td>
+						<i class="icons-person-color fa fa-briefcase fa"></i>
+						<span th:text="${rs.department.name}"></span>
 					</td>
 			 	</tr>
 			 </tbody>
