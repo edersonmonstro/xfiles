@@ -95,22 +95,23 @@ public class DepartmentRestController {
      * 
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteDepartment(@PathVariable("id") Integer id) {
+    public ResponseEntity<Object> deleteDepartment(@PathVariable("id") Integer id) {
         try {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cannot remove " + service.getOne(id).getName() + ": " +e.getMessage());
         }
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<HttpStatus> deleteAllDepartments() {
+    public ResponseEntity<Object> deleteAllDepartments() {
       try {
         service.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-      } catch (Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      } catch (Exception e) {  
+        System.out.println(e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
       }
   
     }

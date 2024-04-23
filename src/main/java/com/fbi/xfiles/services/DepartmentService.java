@@ -1,6 +1,8 @@
 package com.fbi.xfiles.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,10 @@ public class DepartmentService {
 
 	public List<Department> findByActive(Boolean active){
 		return repository.findAllByActive(active);
+	}
+
+	public Optional<Department> findById(Integer id){
+		return repository.findById(id);
 	}
 
 }

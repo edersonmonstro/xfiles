@@ -119,9 +119,20 @@
 						success: function(jsonResponse) {
 							var tipomsg = 'success';
 							$('#tr'+id).fadeOut(1500);
+							Swal.fire({
+								title: 'Success',
+								text: "Item removed",
+								icon: 'success'
+							});
 						},
 						error: function(xhr, status, error) {
-							//
+							var errorMessage = xhr.responseText;
+							console.log(xhr);
+							Swal.fire({
+								title: 'Error',
+								text: errorMessage,
+								icon: 'error'
+							});
 						}
 					});
 				}
