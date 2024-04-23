@@ -38,8 +38,6 @@
 		
 					<div class="col-12">
 						<button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
-						<a th:if="${department.id}" th:href="@{/departments/delete/{departmentId}(departmentId=${department.id})}"
-							class="btn btn-danger btn-sm">Delete</a>
 						<button type="button" class="btn btn-warning btn-sm" id="back" onclick="history.back()">Back</button>
 					</div>
 				</form>

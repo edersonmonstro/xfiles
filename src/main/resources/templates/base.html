@@ -15,9 +15,7 @@
 <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
 <link th:href="@{/css/dataTables.bootstrap5.min.css}" rel="stylesheet" />
 <link th:href="@{/css/dataTables.bootstrap5.min.css}" rel="stylesheet" />
-<!-- Inclua o CSS do SweetAlert -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
+<link th:href="@{/css/sweetalert2.min.css}" rel="stylesheet" />
 
 <!-- variable activeMenu is set at every navigation from controller  -->
 <div th:fragment="menu-top">
@@ -94,8 +92,7 @@
 	<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
 	<script th:src="@{/js/dataTables.fixedHeader.min.js}"></script>
 	<script th:src="@{/js/dataTables.responsive.min.js}"></script>
-	<!-- Inclua o JavaScript do SweetAlert -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+	<script th:src="@{/js/sweetalert2.all.min.js}"></script>
 	
 	
 </div>
