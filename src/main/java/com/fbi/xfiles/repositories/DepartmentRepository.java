@@ -32,5 +32,4 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     @Query("SELECT DISTINCT d FROM Department d LEFT JOIN FETCH d.agents")
 	  List<Department> findAllWithAgents();
 
-
 }

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 
@@ -129,5 +130,13 @@ public class Department implements Serializable {
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + ", creationDate=" + creationDate + ", email=" + email + ", active=" + active + "]";
 	}
+
+	@PreRemove
+    private void preRemove() {
+        if (!agents.isEmpty()) {
+			System.out.println("esta caindo no erro do PreRemove");
+            throw new RuntimeException("Agents allocated in this Department");
+        }
+    }
 
 }
