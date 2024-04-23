@@ -27,6 +27,7 @@ public class DepartmentController {
 	
 	@GetMapping("")
 	public ModelAndView index(Model model) {
+		System.out.println("get do department");
 		model.addAttribute("activePage", "menuItemDepartments");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/department/list");

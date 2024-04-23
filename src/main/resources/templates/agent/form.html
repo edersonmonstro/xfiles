@@ -39,7 +39,14 @@
                         <div class="invalid-feedback" th:errors="*{birthDate}">Insert a valid birth date for agent</div>
                     </div>
 
-		
+					<div class="col-9">
+						<label for="inputDepartment" class="form-label">Department</label> 
+						<select id="department" name="departmentId">
+							<option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}">Department Name</option>
+						</select>
+						<div class="invalid-feedback" th:errors="*{birthDate}">Insert a valid department for agent</div>
+					</div>
+
 					<div class="col-12">
 						<button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
 						<button type="button" class="btn btn-warning btn-sm" id="back" onclick="history.back()">Back</button>

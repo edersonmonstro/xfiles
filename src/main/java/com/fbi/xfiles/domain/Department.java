@@ -2,13 +2,16 @@ package com.fbi.xfiles.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -34,6 +37,9 @@ public class Department implements Serializable {
 
 	@Column
 	private Boolean active;
+
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    private List<Agent> agents;
 
 	public Department() {
 	}
@@ -91,6 +97,14 @@ public class Department implements Serializable {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public List<Agent> getAgents(){
+		return agents;
+	}
+
+	public void setAgents(List<Agent> agents){
+		this.agents = agents;
 	}
 
 	@Override

@@ -24,27 +24,35 @@
 				<th>Name</th>
 				<th>Creation Date</th>
 				<th>E-Mail</th>
-				<th>Actions</th>
+				<th>Agents Designated</th>
+   			<th>Actions</th>
 			</thead>
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
 					<th scope="row" th:text="${rs.id}"></td>
 					<td>
+
 						<i class="icon_color fa fa-briefcase"></i>
 						<span th:text="${rs.name}"></span>
 					</td>
+        
 					<td>
 						<i class="icon_color fa fa-calendar"></i>
-
-						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />
-						
+						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />						
 						<span th:id="'badge' + ${rs.id}"></span>
-						
 					</td>
+        
 					<td>
 						<i class="icon_color fa fa-envelope"></i>
 						<span th:text="${rs.email}"></span>
 					</td>
+        
+          <td>
+						<ul class="list-group">
+							<li class="list-group-item" th:each="agent : ${rs.agents}" th:text="${agent.name}"></li>
+						</ul>
+					</td>
+        
 					<td>
 						<a th:href="@{'/departments/setupEdit/'+${rs.id}}" class="btn btn-sm btn-secondary" role="button" title="Edit">
 							<i class="icon_color fa fa-pencil"></i>	
@@ -55,7 +63,8 @@
 						th:data-record-description="${rs.name}">
 						<i class="fa fa-trash"></i>
 						</a>
-					</td>
+        </td>
+        
 			 	</tr>
 			 </tbody>
 		</table>
