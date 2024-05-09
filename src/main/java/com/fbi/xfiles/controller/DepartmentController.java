@@ -1,6 +1,8 @@
 package com.fbi.xfiles.controller;
 
 import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,6 @@ public class DepartmentController {
 	
 	@GetMapping("")
 	public ModelAndView index(Model model) {
-		System.out.println("get do department");
 		model.addAttribute("activePage", "menuItemDepartments");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/department/list");
@@ -62,7 +63,7 @@ public class DepartmentController {
 	}
 
 	@GetMapping("/setupEdit/{id}")
-	public String setupEdit(@PathVariable("id") Integer id, Model model) {
+	public String setupEdit(@PathVariable("id") UUID id, Model model) {
 		Department department = service.getOne(id);
 		model.addAttribute("department", department);
 		return "/department/form";

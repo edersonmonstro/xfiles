@@ -1,13 +1,15 @@
 package com.fbi.xfiles.repositories;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.fbi.xfiles.domain.Department;
 
-public interface DepartmentRepository extends JpaRepository<Department, Integer> {
+public interface DepartmentRepository extends JpaRepository<Department, UUID> {
 
     /**
      * @param name
@@ -27,7 +29,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
      * @param id
      * @return
      */
-    Department getOne(Integer id);
+    Department getOne(UUID id);
 
     @Query("SELECT DISTINCT d FROM Department d LEFT JOIN FETCH d.agents")
 	  List<Department> findAllWithAgents();

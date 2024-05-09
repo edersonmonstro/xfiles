@@ -2,8 +2,9 @@ package com.fbi.xfiles.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -24,7 +26,7 @@ public class Agent implements Serializable {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private UUID id;
 
 	@Column(nullable = false)
 	private String name;
@@ -37,7 +39,7 @@ public class Agent implements Serializable {
     @JoinColumn(name = "department_id")
     private Department department;
 
-	public Agent(Integer id, String name, LocalDate birthDate, Department department) {
+	public Agent(UUID id, String name, LocalDate birthDate, Department department) {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
@@ -53,11 +55,11 @@ public class Agent implements Serializable {
 	public Agent() {
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

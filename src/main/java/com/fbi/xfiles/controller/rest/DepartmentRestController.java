@@ -2,6 +2,8 @@ package com.fbi.xfiles.controller.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +54,7 @@ public class DepartmentRestController {
      * 
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Department> getDepartmentById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Department> getDepartmentById(@PathVariable("id") UUID id) {
       Department data = service.getOne(id);
   
       if (data.getId() != null) {
@@ -95,7 +97,7 @@ public class DepartmentRestController {
      * 
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteDepartment(@PathVariable("id") Integer id) {
+    public ResponseEntity<Object> deleteDepartment(@PathVariable("id") UUID id) {
         try {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

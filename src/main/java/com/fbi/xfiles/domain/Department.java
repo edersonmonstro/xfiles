@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ public class Department implements Serializable {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private UUID id;
 
 	@Column(nullable = false)
 	private String name;
@@ -45,7 +46,7 @@ public class Department implements Serializable {
 	public Department() {
 	}
 
-	public Department(Integer id, String name, Date creationDate, String email, Boolean active) {
+	public Department(UUID id, String name, Date creationDate, String email, Boolean active) {
 		this.id = id;
 		this.name = name;
 		this.creationDate = creationDate;
@@ -60,11 +61,11 @@ public class Department implements Serializable {
 		this.active = active;
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -134,7 +135,6 @@ public class Department implements Serializable {
 	@PreRemove
     private void preRemove() {
         if (!agents.isEmpty()) {
-			System.out.println("esta caindo no erro do PreRemove");
             throw new RuntimeException("Agents allocated in this Department");
         }
     }

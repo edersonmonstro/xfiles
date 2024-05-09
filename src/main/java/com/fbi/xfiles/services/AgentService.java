@@ -1,6 +1,8 @@
 package com.fbi.xfiles.services;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class AgentService {
 		return repository.findAllByName(name);
 	}
 
-	public Agent getOne(Integer id){
+	public Agent getOne(UUID id){
 		return repository.getOne(id);
 	}
 
@@ -30,7 +32,7 @@ public class AgentService {
 		return repository.save(d);
 	}
 
-	public void deleteById(Integer id){
+	public void deleteById(UUID id){
 		repository.deleteById(id);
 	}
 
