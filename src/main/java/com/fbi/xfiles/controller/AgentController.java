@@ -1,7 +1,7 @@
 package com.fbi.xfiles.controller;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +58,7 @@ public class AgentController {
 	 */
 	@PostMapping("/save")
 	public String saveObject(Model model, @ModelAttribute("agent") AgentDTO agentDTO, 
-		@RequestParam("departmentId") Integer departmentId,
+		@RequestParam("departmentId") UUID departmentId,
 			BindingResult result) {
 		
 		model.addAttribute("activePage", "menuItemAgents");
@@ -84,7 +84,7 @@ public class AgentController {
 	}
 
 	@GetMapping("/setupEdit/{id}")
-	public String setupEdit(@PathVariable("id") Integer id, Model model) {
+	public String setupEdit(@PathVariable("id") UUID id, Model model) {
 		Agent agent = service.getOne(id);
 		model.addAttribute("agent", agent);
 		return "/agent/form";

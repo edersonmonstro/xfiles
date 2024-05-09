@@ -2,6 +2,7 @@ package com.fbi.xfiles.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class DepartmentService {
 		return repository.findAllByName(name);
 	}
 
-	public Department getOne(Integer id){
+	public Department getOne(UUID id){
 		return repository.getOne(id);
 	}
 
@@ -31,7 +32,7 @@ public class DepartmentService {
 		return repository.save(d);
 	}
 
-	public void deleteById(Integer id){
+	public void deleteById(UUID id){
 		repository.deleteById(id);
 	}
 
@@ -43,7 +44,7 @@ public class DepartmentService {
 		return repository.findAllByActive(active);
 	}
 
-	public Optional<Department> findById(Integer id){
+	public Optional<Department> findById(UUID id){
 		return repository.findById(id);
 	}
 

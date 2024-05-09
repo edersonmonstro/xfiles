@@ -1,6 +1,7 @@
 package com.fbi.xfiles.domain.dto;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,7 +10,7 @@ import com.fbi.xfiles.domain.Department;
 
 public class AgentDTO {
 
-	private Integer id;
+	private UUID id;
 
 	private String name;
 
@@ -21,18 +22,18 @@ public class AgentDTO {
 	public AgentDTO() {
 	}
 
-	public AgentDTO(Integer id, String name, LocalDate birthDate, Department department) {
+	public AgentDTO(UUID id, String name, LocalDate birthDate, Department department) {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
 		this.department = department;
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

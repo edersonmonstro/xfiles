@@ -20,15 +20,17 @@
 		   
 		<table id="tb1" class="table table-striped table-hover">
 			<thead>
-				<th>#</th>
-				<th>Name</th>
-        <th>Birth Date</th>
-				<th>Department</th>
-        <th>Actions</th>
-      </thead>
+				<tr>
+					<th>#</th>
+					<td>Name</th>
+	        		<th>Birth Date</th>
+					<th>Department</th>
+	        		<th>Actions</th>
+	        	</tr>
+      		</thead>
 			<tbody>
 				<tr th:each="rs : ${list}" th:id="'tr' + ${rs.id}">
-					<th scope="row" th:text="${rs.id}"></td>
+					<td scope="row" th:text="${rs.id}"></td>
 					<td>
 						<i class="icons-person-color fa fa-person fa"></i>
 						<span th:text="${rs.name}"></span>

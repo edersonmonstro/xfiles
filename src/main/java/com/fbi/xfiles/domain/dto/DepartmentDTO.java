@@ -1,12 +1,13 @@
 package com.fbi.xfiles.domain.dto;
 
 import java.util.Date;
+import java.util.UUID;
 
 import com.fbi.xfiles.domain.Department;
 
 public class DepartmentDTO {
 
-	private Integer id;
+	private UUID id;
 
 	private String name;
 
@@ -17,18 +18,18 @@ public class DepartmentDTO {
 	public DepartmentDTO() {
 	}
 
-	public DepartmentDTO(Integer id, String name, Date creationDate, String email) {
+	public DepartmentDTO(UUID id, String name, Date creationDate, String email) {
 		this.id = id;
 		this.name = name;
 		this.creationDate = creationDate;
 		this.email = email;
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
