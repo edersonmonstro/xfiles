@@ -40,4 +40,6 @@ public interface AgentRepository extends JpaRepository<Agent, UUID> {
      */
     List<Agent> findByName(String name);
 
+	List<Agent> findAll();
+
 }
