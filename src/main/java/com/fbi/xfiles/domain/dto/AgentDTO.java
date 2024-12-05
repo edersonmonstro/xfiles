@@ -29,6 +29,48 @@ public class AgentDTO {
 		this.department = department;
 	}
 
+	private AgentDTO(Builder builder) {
+		this.id = builder.id;
+		this.name = builder.name;
+		this.birthDate = builder.birthDate;
+		this.department = builder.department;
+	}
+
+	public static class Builder {
+		private UUID id;
+		private String name;
+		private LocalDate birthDate;
+		private Department department;
+
+		public Builder id(UUID id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder birthDate(LocalDate birthDate) {
+			this.birthDate = birthDate;
+			return this;
+		}
+
+		public Builder department(Department department) {
+			this.department = department;
+			return this;
+		}
+
+		public AgentDTO build() {
+			// Adicione validações se necessário
+			if (id == null || name == null) {
+				throw new IllegalArgumentException("ID and Name are required");
+			}
+			return new AgentDTO(this);
+		}
+	}
+
 	public UUID getId() {
 		return id;
 	}
