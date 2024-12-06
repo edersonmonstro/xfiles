@@ -31,6 +31,9 @@ public class Department implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
+	@Column(nullable = false)
+	private String acronym;
+
 	@Column
 	private Date creationDate;
 
@@ -75,6 +78,14 @@ public class Department implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getAcronym() {
+		return acronym;
+	}
+
+	public void setAcronym(String acronym) {
+		this.acronym = acronym;
 	}
 
 	public Date getCreationDate() {
@@ -124,12 +135,13 @@ public class Department implements Serializable {
 			return false;
 		Department other = (Department) obj;
 		return Objects.equals(creationDate, other.creationDate) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(active, other.active);
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(acronym, other.acronym) && Objects.equals(active, other.active);
 	}
 
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", name=" + name + ", creationDate=" + creationDate + ", email=" + email + ", active=" + active + "]";
+		return "Department [id=" + id + ", name=" + name + ", acronym=" + acronym + ", creationDate=" + creationDate + ", email=" + email + ", active=" + active + "]";
 	}
 
 	@PreRemove
