@@ -22,6 +22,7 @@
 			<thead>
 				<th>#</th>
 				<th>Name</th>
+				<th>Acronym</th>
 				<th>Creation Date</th>
 				<th>E-Mail</th>
 				<th>Agents Designated</th>
@@ -35,7 +36,13 @@
 						<i class="icon_color fa fa-briefcase"></i>
 						<span th:text="${rs.name}"></span>
 					</td>
-        
+
+					<td>
+
+						<i class="icon_color fa fa-briefcase"></i>
+						<span th:text="${rs.acronym}"></span>
+					</td>
+
 					<td>
 						<i class="icon_color fa fa-calendar"></i>
 						<span th:id="'date' + ${rs.id}" th:text="${#dates.format(rs.creationDate, 'dd/MM/yyyy hh:mm:ss')}" />						
